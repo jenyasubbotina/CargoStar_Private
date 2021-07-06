@@ -23,6 +23,15 @@ public abstract class RequestDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     public abstract long[] insertRequests(final List<Request> newRequestList);
 
+    @Query("SELECT id FROM request WHERE id = :id LIMIT 1")
+    public abstract long getItemId(final Long id);
+
+    @Query("DELETE FROM request WHERE id NOT IN (:newRequestList)")
+    public abstract void deleteOldRequests(final List<Long> newRequestList);
+
+    @Query("UPDATE request SET is_new = 1 WHERE id NOT IN (:newRequestList)")
+    public abstract void setRequestAsNew(final List<Long> newRequestList);
+
     @Transaction
     public long[] dropAndInsertRequestList(final List<Request> newRequestList) {
         dropRequests();

@@ -129,6 +129,7 @@
     <string name="update_invoice">Редактировать накладную</string>
     <!-- notifications -->
     <string name="notifications">Уведомления</string>
+    <string name="mark_as_read"> Отметить все как прочитанное </string>
     <string name="date_example">15.04.2020</string>
     <string name="new_bid">Новая заявка в </string>
     <string name="public_bids_quote">\"Общие заявки\"</string>

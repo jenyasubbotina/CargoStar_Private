@@ -9,26 +9,45 @@
     android:overScrollMode="never"
     android:fillViewport="true"
     android:fitsSystemWindows="true"
-    android:background="#FFF">
+    android:background="@color/colorWhite">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginHorizontal="18dp"
-        android:layout_marginBottom="18dp"
-        android:elevation="8dp"
+        android:layout_marginHorizontal="@dimen/s_margin"
+        android:layout_marginBottom="@dimen/s_margin"
+        android:elevation="@dimen/standart_elevation"
         android:background="@drawable/card_bottom_radius_white">
+
+        <Button
+            android:id="@+id/mark_all_read_button"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:minHeight="0dp"
+            android:layout_marginEnd="@dimen/s_margin"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toEndOf="@id/notifications_text_view"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="@dimen/xl_margin"
+            android:layout_marginStart="@dimen/xl_margin"
+            android:text="@string/mark_as_read"
+            android:textSize="@dimen/h2"
+            android:gravity="end"
+            android:textColor="@color/colorBlack"
+            android:textAllCaps="false"
+            android:fontFamily="@font/geometria_bold"
+            android:background="@android:color/transparent"/>
 
         <TextView
             android:id="@+id/notifications_text_view"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginTop="37dp"
-            android:layout_marginStart="41dp"
+            android:layout_marginTop="@dimen/xl_margin"
+            android:layout_marginStart="@dimen/xl_margin"
             android:text="@string/notifications"
-            android:textSize="19sp"
+            android:textSize="@dimen/h1"
             android:textColor="@color/colorBlack"
             android:fontFamily="@font/geometria_bold"/>
 
@@ -40,6 +59,8 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginTop="21dp"/>
+            android:layout_marginTop="@dimen/m_margin"/>
+
     </androidx.constraintlayout.widget.ConstraintLayout>
+
 </androidx.core.widget.NestedScrollView>

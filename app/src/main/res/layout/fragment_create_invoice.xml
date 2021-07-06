@@ -721,7 +721,7 @@
 
         <TextView
             android:id="@+id/recipient_cargo_text_view"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             app:layout_constraintTop_toTopOf="@id/recipient_phone_text_view"
             app:layout_constraintStart_toStartOf="@id/recipient_zip_text_view"
@@ -775,7 +775,7 @@
 
         <TextView
             android:id="@+id/recipient_fedex_text_view"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             app:layout_constraintTop_toTopOf="@id/recipient_tnt_text_view"
             app:layout_constraintStart_toStartOf="@id/recipient_cargo_text_view"

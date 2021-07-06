@@ -44,9 +44,9 @@
             android:id="@+id/linear"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/m_margin"
             android:baselineAligned="false"
             android:orientation="horizontal"
+            android:layout_marginVertical="@dimen/m_margin"
             app:layout_constraintStart_toStartOf="@id/upper_stroke"
             app:layout_constraintTop_toBottomOf="@id/upper_stroke">
 
@@ -57,9 +57,8 @@
 
                 <ImageView
                     android:id="@+id/current_parcels_image_view"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="18dp"
+                    android:layout_width="122dp"
+                    android:layout_height="116dp"
                     android:layout_centerHorizontal="true"
                     android:background="@drawable/card_white"
                     android:contentDescription="@string/cargostar"
@@ -89,8 +88,8 @@
 
                 <ImageView
                     android:id="@+id/scan_parcels_image_view"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="122dp"
+                    android:layout_height="116dp"
                     android:layout_centerHorizontal="true"
                     android:background="@drawable/card_white"
                     android:contentDescription="@string/cargostar"
@@ -120,8 +119,8 @@
 
                 <ImageView
                     android:id="@+id/parcel_delivery_image_view"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="122dp"
+                    android:layout_height="116dp"
                     android:layout_centerHorizontal="true"
                     android:background="@drawable/card_white"
                     android:contentDescription="@string/cargostar"

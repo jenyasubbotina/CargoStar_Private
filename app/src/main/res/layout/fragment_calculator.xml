@@ -334,12 +334,13 @@
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/calculationsRecyclerView"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="350dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/calculated_items_stroke"
-                tools:itemCount="2" />
+                tools:itemCount="2"
+                android:nestedScrollingEnabled="true"/>
 
             <View
                 android:id="@+id/result_stroke"
@@ -354,93 +355,94 @@
                 android:id="@+id/total_quantity_text_view"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/xl_margin"
-                android:layout_marginEnd="@dimen/m_margin"
-                android:fontFamily="@font/geometria_medium"
-                android:text="@string/quantity"
-                android:textColor="@color/colorTextHint"
-                android:textSize="@dimen/h2"
-                app:layout_constraintEnd_toStartOf="@id/total_weight_text_view"
+                app:layout_constraintTop_toBottomOf="@id/calculationsRecyclerView"
                 app:layout_constraintStart_toStartOf="@id/calculator_text_view"
-                app:layout_constraintTop_toBottomOf="@id/calculate_btn" />
+                app:layout_constraintEnd_toStartOf="@id/total_weight_text_view"
+                android:layout_marginEnd="19dp"
+                android:layout_marginTop="45dp"
+                android:fontFamily="@font/geometria_medium"
+                android:textSize="16sp"
+                android:textColor="#A5ABC0"
+                android:text="@string/quantity"/>
 
             <TextView
                 android:id="@+id/total_weight_text_view"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="@dimen/l_margin"
-                android:fontFamily="@font/geometria_medium"
-                android:text="@string/weight"
-                android:textColor="@color/colorTextHint"
-                android:textSize="@dimen/h2"
+                app:layout_constraintTop_toTopOf="@id/total_quantity_text_view"
                 app:layout_constraintBottom_toBottomOf="@id/total_quantity_text_view"
-                app:layout_constraintEnd_toStartOf="@id/total_dimensions_text_view"
                 app:layout_constraintStart_toEndOf="@id/total_quantity_text_view"
-                app:layout_constraintTop_toTopOf="@id/total_quantity_text_view" />
+                app:layout_constraintEnd_toStartOf="@id/total_dimensions_text_view"
+                android:layout_marginHorizontal="24dp"
+                android:fontFamily="@font/geometria_medium"
+                android:textSize="16sp"
+                android:textColor="#A5ABC0"
+                android:text="@string/weight"/>
 
             <TextView
                 android:id="@+id/total_dimensions_text_view"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/xl_margin"
-                android:fontFamily="@font/geometria_medium"
-                android:text="@string/dimensions"
-                android:textColor="@color/colorTextHint"
-                android:textSize="@dimen/h2"
+                app:layout_constraintTop_toTopOf="@id/total_quantity_text_view"
                 app:layout_constraintBottom_toBottomOf="@id/total_quantity_text_view"
                 app:layout_constraintStart_toEndOf="@id/total_weight_text_view"
-                app:layout_constraintTop_toTopOf="@id/total_quantity_text_view" />
+                android:layout_marginStart="48dp"
+                android:fontFamily="@font/geometria_medium"
+                android:textSize="16sp"
+                android:textColor="#A5ABC0"
+                android:text="@string/dimensions"/>
 
             <TextView
                 android:id="@+id/total_quantity_value_text_view"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/m_margin"
-                android:fontFamily="@font/geometria_actual"
-                android:textColor="@color/colorBlack"
-                android:textSize="@dimen/h2"
+                app:layout_constraintTop_toBottomOf="@id/total_quantity_text_view"
                 app:layout_constraintStart_toStartOf="@id/total_quantity_text_view"
-                app:layout_constraintTop_toBottomOf="@id/total_quantity_text_view" />
+                android:layout_marginTop="19dp"
+                android:fontFamily="@font/geometria_actual"
+                android:textSize="16sp"
+                android:textColor="@color/colorBlack" />
 
             <TextView
                 android:id="@+id/total_weight_value_text_view"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/geometria_actual"
-                android:textColor="@color/colorBlack"
-                android:textSize="@dimen/h2"
+                app:layout_constraintTop_toTopOf="@id/total_quantity_value_text_view"
                 app:layout_constraintBottom_toBottomOf="@id/total_quantity_value_text_view"
                 app:layout_constraintStart_toStartOf="@id/total_weight_text_view"
-                app:layout_constraintTop_toTopOf="@id/total_quantity_value_text_view" />
+                android:fontFamily="@font/geometria_actual"
+                android:textSize="16sp"
+                android:textColor="@color/colorBlack" />
 
             <TextView
                 android:id="@+id/total_dimensions_value_text_view"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/geometria_actual"
-                android:textColor="@color/colorBlack"
-                android:textSize="@dimen/h2"
+                app:layout_constraintTop_toTopOf="@id/total_quantity_value_text_view"
                 app:layout_constraintBottom_toBottomOf="@id/total_quantity_value_text_view"
                 app:layout_constraintStart_toStartOf="@id/total_dimensions_text_view"
-                app:layout_constraintTop_toTopOf="@id/total_quantity_value_text_view" />
+                android:fontFamily="@font/geometria_actual"
+                android:textSize="16sp"
+                android:textColor="@color/colorBlack" />
 
             <Button
                 android:id="@+id/calculate_btn"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="@id/total_quantity_text_view"
+                app:layout_constraintBottom_toBottomOf="@id/total_quantity_value_text_view"
+                app:layout_constraintStart_toEndOf="@id/total_dimensions_text_view"
+                app:layout_constraintEnd_toEndOf="@id/destination_country_spinner"
+                android:layout_marginStart="52dp"
                 android:background="@drawable/btn_gradient_orange"
-                android:fontFamily="@font/geometria_medium"
-                android:layout_marginHorizontal="100dp"
-                android:layout_marginTop="@dimen/s_margin"
-                android:paddingHorizontal="@dimen/s_margin"
-                android:paddingVertical="@dimen/m_margin"
+                android:paddingVertical="18dp"
+                android:paddingHorizontal="4dp"
                 android:text="@string/calculate"
                 android:textAllCaps="false"
-                android:textColor="@color/colorWhite"
-                android:textSize="@dimen/h1"
-                app:layout_constraintTop_toBottomOf="@id/calculationsRecyclerView"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent" />
+                android:textColor="#FFF"
+                android:textSize="17sp"
+                android:fontFamily="@font/geometria_medium"
+                android:elevation="8dp"/>
 
             <TextView
                 android:id="@+id/calculation_result_text_view"

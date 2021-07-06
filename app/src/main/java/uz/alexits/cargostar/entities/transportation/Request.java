@@ -124,10 +124,10 @@ public class Request {
     @ColumnInfo(name = "payment_status")
     private String paymentStatus;
 
-    @Ignore
-    public Request() {
-        this.isNew = true;
-    }
+//    @Ignore
+//    public Request() {
+//        this.isNew = true;
+//    }
 
     public Request(final long id,
                    final String senderFirstName,

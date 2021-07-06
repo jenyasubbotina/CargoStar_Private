@@ -37,6 +37,10 @@ public class NotificationRepository {
         return notificationDao.selectAllNotifications();
     }
 
+    public void markAllNotifications(final boolean read) {
+        new Thread(() -> notificationDao.setIsReadAllNotifications(read)).start();
+    }
+
     public LiveData<List<Notification>> selectNewNotifications() {
         return notificationDao.selectNewNotifications(false);
     }
@@ -46,6 +50,11 @@ public class NotificationRepository {
     }
 
     public void readNotification(final long notificationId) {
-        new Thread(() -> notificationDao.readNotification(notificationId, true));
+        new Thread(() -> notificationDao.readNotification(notificationId, true)).start();
     }
+
+    public void deleteNotificationById(final long notificationId) {
+        new Thread(() -> notificationDao.deleteNotification(notificationId)).start();
+    }
+
 }

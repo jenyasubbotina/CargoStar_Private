@@ -26,6 +26,9 @@ public interface NotificationDao {
     @Query("UPDATE notification SET is_read = :isRead WHERE id == :notificationId")
     void readNotification(final long notificationId, final boolean isRead);
 
+    @Query("UPDATE notification SET is_read = :isRead WHERE 1=1")
+    void setIsReadAllNotifications(final boolean isRead);
+
     @Query("SELECT * FROM notification WHERE id == :id")
     LiveData<Notification> selectNotification(final long id);
 
@@ -37,4 +40,7 @@ public interface NotificationDao {
 
     @Query("SELECT COUNT() FROM notification WHERE is_read == :isRead")
     LiveData<Integer> selectNewNotificationsCount(final boolean isRead);
+
+    @Query("DELETE from notification WHERE id == :notificationId")
+    public abstract void deleteNotification(final long notificationId);
 }

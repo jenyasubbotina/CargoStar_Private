@@ -2,30 +2,37 @@ package uz.alexits.cargostar.view.fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.Toast;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.fragment.NavHostFragment;
+import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.work.WorkInfo;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.TextView;
-import android.widget.Toast;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import uz.alexits.cargostar.R;
 import uz.alexits.cargostar.push.Notification;
 import uz.alexits.cargostar.utils.Constants;
-import uz.alexits.cargostar.view.viewholder.NotificationViewHolder;
-import uz.alexits.cargostar.viewmodel.NotificationViewModel;
 import uz.alexits.cargostar.utils.IntentConstants;
 import uz.alexits.cargostar.view.activity.MainActivity;
 import uz.alexits.cargostar.view.adapter.NotificationAdapter;
 import uz.alexits.cargostar.view.callback.NotificationCallback;
+import uz.alexits.cargostar.view.viewholder.NotificationViewHolder;
+import uz.alexits.cargostar.viewmodel.NotificationViewModel;
 import uz.alexits.cargostar.viewmodel.factory.NotificationViewModelFactory;
 
 public class NotificationsFragment extends Fragment implements NotificationCallback {
@@ -41,11 +48,14 @@ public class NotificationsFragment extends Fragment implements NotificationCallb
     private ImageView profileImageView;
     private TextView badgeCounterTextView;
     private ImageView notificationsImageView;
+    private Button markAsReadButton;
 
     //main content views
     private NotificationAdapter notificationAdapter;
 
     private NotificationViewModel notificationViewModel;
+
+    private List<Notification> allNotifications = new ArrayList<>();
 
     public NotificationsFragment() {
         // Required empty public constructor
@@ -81,10 +91,28 @@ public class NotificationsFragment extends Fragment implements NotificationCallb
         final LinearLayoutManager layoutManager = new LinearLayoutManager(requireContext());
         layoutManager.setOrientation(RecyclerView.VERTICAL);
 
+        markAsReadButton = root.findViewById(R.id.mark_all_read_button);
+
         notificationAdapter = new NotificationAdapter(requireContext(), this);
         notificationRecyclerView.setHasFixedSize(false);
         notificationRecyclerView.setLayoutManager(layoutManager);
         notificationRecyclerView.setAdapter(notificationAdapter);
+
+        ItemTouchHelper.SimpleCallback touchHelperCallback = new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT) {
+            @Override
+            public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder target) {
+                return false;
+            }
+
+            @Override
+            public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction) {
+                int pos = viewHolder.getAdapterPosition();
+                notificationViewModel.deleteNotification(allNotifications.get(pos).getId());
+            }
+        };
+
+        ItemTouchHelper itemTouchHelper = new ItemTouchHelper(touchHelperCallback);
+        itemTouchHelper.attachToRecyclerView(notificationRecyclerView);
 
         return root;
     }
@@ -92,8 +120,8 @@ public class NotificationsFragment extends Fragment implements NotificationCallb
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        //header views
 
+        //header views
         profileImageView.setOnClickListener(v -> {
             NavHostFragment.findNavController(this).navigate(R.id.mainFragment);
         });
@@ -108,6 +136,10 @@ public class NotificationsFragment extends Fragment implements NotificationCallb
 
         editImageView.setOnClickListener(v -> {
             NavHostFragment.findNavController(this).navigate(R.id.profileFragment);
+        });
+
+        markAsReadButton.setOnClickListener(v -> {
+            notificationViewModel.readAllNotification(true);
         });
 
         notificationsImageView.setOnClickListener(null);
@@ -165,6 +197,7 @@ public class NotificationsFragment extends Fragment implements NotificationCallb
         //init notificationList
         notificationViewModel.selectAllNotifications().observe(getViewLifecycleOwner(), notificationList -> {
             notificationAdapter.setNotificationList(notificationList);
+            allNotifications = notificationList;
         });
 
     }

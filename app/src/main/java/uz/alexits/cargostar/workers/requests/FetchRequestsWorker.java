@@ -15,6 +15,7 @@ import uz.alexits.cargostar.entities.location.Branche;
 import uz.alexits.cargostar.entities.transportation.Request;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import retrofit2.Response;
 import uz.alexits.cargostar.utils.Constants;
@@ -61,8 +62,15 @@ public class FetchRequestsWorker extends Worker {
                 if (response.code() == 200) {
                     if (response.isSuccessful()) {
                         final List<Request> requestList = response.body();
-
+                        final List<Long> requestListIds = new ArrayList<>();
+                        if (requestList != null) {
+                            for (Request r : requestList) {
+                                requestListIds.add(r.getId());
+                            }
+                        }
                         LocalCache.getInstance(getApplicationContext()).requestDao().insertRequests(requestList);
+                        LocalCache.getInstance(getApplicationContext()).requestDao().deleteOldRequests(requestListIds);
+                        //LocalCache.getInstance(getApplicationContext()).requestDao().setRequestAsOld(requestListIds);
                     }
                 }
                 else {
